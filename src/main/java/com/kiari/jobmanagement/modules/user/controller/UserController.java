@@ -1,12 +1,11 @@
-package com.kiari.jobmanagement.modules.user;
+package com.kiari.jobmanagement.modules.user.controller;
 
-import com.kiari.jobmanagement.exceptions.ResourceAlreadyExistsException;
-import com.kiari.jobmanagement.exceptions.UserNotFoundException;
 import com.kiari.jobmanagement.models.UserEntity;
+import com.kiari.jobmanagement.modules.user.useCases.CreateUserUseCase;
+import com.kiari.jobmanagement.modules.user.useCases.GetAllUsersUseCase;
+import com.kiari.jobmanagement.modules.user.useCases.GetUserByIdUseCase;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,32 +18,26 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class UserController {
 
-    final IUserRepository repository;
+    final CreateUserUseCase createUserUseCase;
+    final GetAllUsersUseCase getAllUsersUseCase;
+    final GetUserByIdUseCase getUserByIdUseCase;
 
     @GetMapping({"", "/"})
     public ResponseEntity<List<UserEntity>> getAllUser() {
-        var users = repository.findAll();
+        var users = getAllUsersUseCase.execute();
         return ResponseEntity.ok(users);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<UserEntity> getUserById(@PathVariable UUID id) {
-
-        var user = repository.findById(id)
-                .orElseThrow(() -> new UserNotFoundException(String.format("User with id %s not found", id)));
-
+        var user = getUserByIdUseCase.execute(id);
         return ResponseEntity.ok(user);
     }
 
     @PostMapping({"", "/"})
     public ResponseEntity<UserEntity> CreateUser(@Valid @RequestBody UserEntity userEntity) {
 
-       repository.findByUsernameOrEmail(userEntity.getUsername(), userEntity.getEmail())
-               .ifPresent(user -> {
-                   throw new ResourceAlreadyExistsException();
-               });
-
-        var user = repository.save(userEntity);
+        var user = createUserUseCase.execute(userEntity);
 
         return ResponseEntity
                 .created(URI.create("/users/" + user.getId()))

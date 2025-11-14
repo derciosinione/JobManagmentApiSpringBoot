@@ -1,4 +1,4 @@
-package com.kiari.jobmanagement.modules.user;
+package com.kiari.jobmanagement.modules.user.repository;
 
 import com.kiari.jobmanagement.models.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
