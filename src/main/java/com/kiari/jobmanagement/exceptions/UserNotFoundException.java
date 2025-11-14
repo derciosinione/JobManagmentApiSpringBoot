@@ -1,4 +1,4 @@
-package com.kiari.jobmanagment.exceptions;
+package com.kiari.jobmanagement.exceptions;
 
 public class UserNotFoundException extends RuntimeException {
     public UserNotFoundException(String message) {

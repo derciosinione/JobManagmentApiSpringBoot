@@ -1,13 +1,13 @@
-package com.kiari.jobmanagment;
+package com.kiari.jobmanagement;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class JobManagmentApplication {
+public class JobManagementApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(JobManagmentApplication.class, args);
+        SpringApplication.run(JobManagementApplication.class, args);
     }
 
 }
