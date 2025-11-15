@@ -23,24 +23,24 @@ public class CompanyController {
     private final GetCompanyByIdUseCase getCompanyByIdUseCase;
 
     @GetMapping({"", "/"})
-    public ResponseEntity<List<CompanyEntity>> getAllUser() {
+    public ResponseEntity<List<CompanyEntity>> getAll() {
         var data = getAllCompanyUseCase.execute();
         return ResponseEntity.ok(data);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CompanyEntity> getUserById(@PathVariable UUID id) {
+    public ResponseEntity<CompanyEntity> getById(@PathVariable UUID id) {
         var data = getCompanyByIdUseCase.execute(id);
         return ResponseEntity.ok(data);
     }
 
     @PostMapping({"", "/"})
-    public ResponseEntity<CompanyEntity> CreateUser(@Valid @RequestBody CompanyEntity entity) {
+    public ResponseEntity<CompanyEntity> create(@Valid @RequestBody CompanyEntity request) {
 
-        var user = createCompanyUseCase.execute(entity);
+        var response = createCompanyUseCase.execute(request);
 
         return ResponseEntity
-                .created(URI.create("/company/" + user.getId()))
-                .body(user);
+                .created(URI.create("/company/" + response.getId()))
+                .body(response);
     }
 }

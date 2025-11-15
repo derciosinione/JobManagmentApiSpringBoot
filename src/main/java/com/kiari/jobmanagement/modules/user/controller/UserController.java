@@ -24,24 +24,24 @@ public class UserController {
 
     @GetMapping({"", "/"})
     public ResponseEntity<List<UserEntity>> getAllUser() {
-        var users = getAllUsersUseCase.execute();
-        return ResponseEntity.ok(users);
+        var data = getAllUsersUseCase.execute();
+        return ResponseEntity.ok(data);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<UserEntity> getUserById(@PathVariable UUID id) {
-        var user = getUserByIdUseCase.execute(id);
-        return ResponseEntity.ok(user);
+        var data = getUserByIdUseCase.execute(id);
+        return ResponseEntity.ok(data);
     }
 
     @PostMapping({"", "/"})
-    public ResponseEntity<UserEntity> CreateUser(@Valid @RequestBody UserEntity userEntity) {
+    public ResponseEntity<UserEntity> CreateUser(@Valid @RequestBody UserEntity request) {
 
-        var user = createUserUseCase.execute(userEntity);
+        var response = createUserUseCase.execute(request);
 
         return ResponseEntity
-                .created(URI.create("/users/" + user.getId()))
-                .body(user);
+                .created(URI.create("/users/" + response.getId()))
+                .body(response);
     }
 
 }
