@@ -1,4 +1,4 @@
-package com.kiari.jobmanagement.models;
+package com.kiari.jobmanagement.modules.user.entities;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

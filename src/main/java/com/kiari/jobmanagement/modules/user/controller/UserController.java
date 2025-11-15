@@ -1,6 +1,6 @@
 package com.kiari.jobmanagement.modules.user.controller;
 
-import com.kiari.jobmanagement.models.UserEntity;
+import com.kiari.jobmanagement.modules.user.entities.UserEntity;
 import com.kiari.jobmanagement.modules.user.useCases.CreateUserUseCase;
 import com.kiari.jobmanagement.modules.user.useCases.GetAllUsersUseCase;
 import com.kiari.jobmanagement.modules.user.useCases.GetUserByIdUseCase;

@@ -1,6 +1,6 @@
 package com.kiari.jobmanagement.modules.user.useCases;
 
-import com.kiari.jobmanagement.models.UserEntity;
+import com.kiari.jobmanagement.modules.user.entities.UserEntity;
 import com.kiari.jobmanagement.modules.user.repository.IUserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
