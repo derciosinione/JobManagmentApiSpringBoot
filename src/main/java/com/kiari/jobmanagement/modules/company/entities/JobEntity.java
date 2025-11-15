@@ -1,6 +1,7 @@
 package com.kiari.jobmanagement.modules.company.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,6 +22,7 @@ public class JobEntity {
     private String title;
     private String description;
     private String benefits;
+    @NotBlank(message = "This field is required, please provide the level")
     private String level;
 
     @Column(name = "company_id")
