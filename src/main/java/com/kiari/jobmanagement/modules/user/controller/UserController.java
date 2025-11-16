@@ -21,11 +21,10 @@ import java.util.UUID;
 //@SecurityRequirement(name = "jwt_auth")
 public class UserController {
 
-    final CreateUserUseCase createUserUseCase;
-    final GetAllUsersUseCase getAllUsersUseCase;
-    final GetUserByIdUseCase getUserByIdUseCase;
+    private final GetAllUsersUseCase getAllUsersUseCase;
+    private final GetUserByIdUseCase getUserByIdUseCase;
 
-    @GetMapping({"", "/"})
+    @GetMapping("")
     public ResponseEntity<List<UserEntity>> getAllUser() {
         var data = getAllUsersUseCase.execute();
         return ResponseEntity.ok(data);
@@ -36,15 +35,4 @@ public class UserController {
         var data = getUserByIdUseCase.execute(id);
         return ResponseEntity.ok(data);
     }
-
-    @PostMapping({"", "/"})
-    public ResponseEntity<UserEntity> CreateUser(@Valid @RequestBody UserEntity request) {
-
-        var response = createUserUseCase.execute(request);
-
-        return ResponseEntity
-                .created(URI.create("/users/" + response.getId()))
-                .body(response);
-    }
-
 }

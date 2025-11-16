@@ -20,6 +20,14 @@ public class SecurityFilter extends OncePerRequestFilter {
     private final JwtProvider jwtProvider;
 
     @Override
+    protected boolean shouldNotFilter(HttpServletRequest request) {
+        return request.getServletPath().startsWith("/auth/sign-in")
+                || request.getServletPath().startsWith("/auth/register")
+                || request.getServletPath().startsWith("/public");
+    }
+
+
+    @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
 

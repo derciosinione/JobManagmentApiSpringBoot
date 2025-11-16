@@ -22,7 +22,7 @@ public class CompanyController {
     private final GetAllCompanyUseCase getAllCompanyUseCase;
     private final GetCompanyByIdUseCase getCompanyByIdUseCase;
 
-    @GetMapping({"", "/"})
+    @GetMapping("")
     public ResponseEntity<List<CompanyEntity>> getAll() {
         var data = getAllCompanyUseCase.execute();
         return ResponseEntity.ok(data);
@@ -34,7 +34,7 @@ public class CompanyController {
         return ResponseEntity.ok(data);
     }
 
-    @PostMapping({"", "/"})
+    @PostMapping("")
     public ResponseEntity<CompanyEntity> create(@Valid @RequestBody CompanyEntity request) {
 
         var response = createCompanyUseCase.execute(request);

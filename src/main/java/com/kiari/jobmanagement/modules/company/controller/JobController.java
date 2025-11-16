@@ -22,7 +22,7 @@ public class JobController {
     private final GetAllJobsUseCase getAllJobsUseCase;
     private final GetJobByIdUseCase getJobByIdUseCase;
 
-    @GetMapping({"", "/"})
+    @GetMapping("" )
     public ResponseEntity<List<JobEntity>> getAll() {
         var data = getAllJobsUseCase.execute();
         return ResponseEntity.ok(data);
@@ -34,7 +34,7 @@ public class JobController {
         return ResponseEntity.ok(data);
     }
 
-    @PostMapping({"", "/"})
+    @PostMapping("")
     public ResponseEntity<JobEntity> create(@Valid @RequestBody JobEntity request) {
         var response = createJobUseCase.execute(request);
 
