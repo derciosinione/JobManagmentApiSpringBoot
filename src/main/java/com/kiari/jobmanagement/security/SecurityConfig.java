@@ -19,14 +19,18 @@ public class SecurityConfig {
 
     private final SecurityFilter securityFilter;
 
+    private final String[] SWAGGER_WHITELIST = {
+            "/swagger-ui/**",
+            "/swagger-resources/**",
+            "/v3/api-docs/**"
+    };
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(
-                                "/auth/**"
-//                                "/public/**"
-                        ).permitAll()
+                        .requestMatchers(SWAGGER_WHITELIST).permitAll()
+                        .requestMatchers("/auth/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/users").permitAll()
                         .anyRequest().authenticated()
                 )

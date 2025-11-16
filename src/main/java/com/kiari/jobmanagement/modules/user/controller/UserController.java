@@ -4,6 +4,8 @@ import com.kiari.jobmanagement.modules.user.entities.UserEntity;
 import com.kiari.jobmanagement.modules.user.useCases.CreateUserUseCase;
 import com.kiari.jobmanagement.modules.user.useCases.GetAllUsersUseCase;
 import com.kiari.jobmanagement.modules.user.useCases.GetUserByIdUseCase;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +18,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/users")
 @RequiredArgsConstructor
+//@SecurityRequirement(name = "jwt_auth")
 public class UserController {
 
     final CreateUserUseCase createUserUseCase;
